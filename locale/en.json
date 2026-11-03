@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Email Notifications",
+    "description": "Email you when a turn finishes or the agent waits for your answer or approval. Also provides a send_email tool with attachment support."
+  }
+}

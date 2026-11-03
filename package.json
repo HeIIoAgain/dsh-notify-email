@@ -1,0 +1,59 @@
+{
+  "name": "dsh-notify-email",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness plugin that emails you when a turn finishes, when the agent waits for an answer or approval, and a send_email tool with attachment support.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "smtp.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "PUBLISHING.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis-bundle",
+    "notification",
+    "email",
+    "smtp",
+    "attachments"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "check": "node --check index.js && node --check smtp.js",
+    "test": "node test/run.mjs"
+  },
+  "author": "HeIIoAgain",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeIIoAgain/dsh-notify-email.git"
+  },
+  "homepage": "https://github.com/HeIIoAgain/dsh-notify-email#readme",
+  "bugs": {
+    "url": "https://github.com/HeIIoAgain/dsh-notify-email/issues"
+  },
+  "icon": "./icon.svg",
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
