@@ -1,0 +1,64 @@
+name: Publish to npm
+
+# ============================================================================
+# 可选文件。PUBLISHING.md 第 5 节承诺了这个工作流，传上来它才成真。
+#
+# 行为：
+#   - 只在推 v* tag 时触发；
+#   - 先校验 tag 与 package.json 的 version 是否一致（不一致直接失败）；
+#   - 没配置 NPM_TOKEN secret 时，只做打包检查，不会发布、也不会红。
+#
+# 启用真实发布的两步：
+#   1. https://www.npmjs.com/settings/~/tokens 生成 Automation 类型 token
+#   2. 仓库 Settings → Secrets and variables → Actions → New repository secret
+#      名称 NPM_TOKEN，值粘贴 token
+#
+# 名字可用性（2026-11-03 核实）：npm registry 上 dsh-notify-email 尚未被占用。
+# ============================================================================
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write # npm publish --provenance 需要
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Tag 与 package.json 版本必须一致
+        shell: bash
+        run: |
+          pkg="$(node -p "require('./package.json').version")"
+          tag="${GITHUB_REF_NAME#v}"
+          echo "package.json = $pkg / tag = $tag"
+          if [ "$pkg" != "$tag" ]; then
+            echo "::error::版本不一致：package.json 是 $pkg，tag 是 $tag"
+            exit 1
+          fi
+
+      - name: 打包检查
+        run: npm pack --dry-run
+
+      - name: 未配置 NPM_TOKEN，跳过发布
+        if: ${{ env.NPM_TOKEN == '' }}
+        run: echo "::notice::没有 NPM_TOKEN secret，本次只做打包检查。"
+
+      - name: Publish
+        if: ${{ env.NPM_TOKEN != '' }}
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
