@@ -1,5 +1,9 @@
 # dsh-notify-email
 
+[![CI](https://github.com/HeIIoAgain/dsh-notify-email/actions/workflows/ci.yml/badge.svg)](https://github.com/HeIIoAgain/dsh-notify-email/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%E2%89%A522-brightgreen.svg)](package.json)
+
 English | [简体中文](README.md)
 
 Email notifications for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (DSH): get mail on your phone when a turn finishes, when the agent waits for your answer, or when a tool needs your approval. The model can also send mail on demand with the `send_email` tool, attachments included.

@@ -1,5 +1,9 @@
 # dsh-notify-email
 
+[![CI](https://github.com/HeIIoAgain/dsh-notify-email/actions/workflows/ci.yml/badge.svg)](https://github.com/HeIIoAgain/dsh-notify-email/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%E2%89%A522-brightgreen.svg)](package.json)
+
 [English](README.en.md) | 简体中文
 
 给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）用的邮件通知插件：任务结束、等你回答、等你授权时发邮件到你手机；模型也能用 `send_email` 工具主动发信，支持附件。
