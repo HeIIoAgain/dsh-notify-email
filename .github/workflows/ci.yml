@@ -1,6 +1,6 @@
 name: CI
 
-# 与 PUBLISHING.md / CHANGELOG 里写的完全一致：
+# 与 README / CHANGELOG 里写的完全一致：
 #   npm run check  ->  node --check index.js && node --check smtp.js
 #   npm test       ->  node test/run.mjs（起本地假 SMTP，只走 loopback）
 #   npm pack --dry-run -> 校验 npm 包里该有的文件都在
